@@ -1,4 +1,4 @@
-@extends('app')
+@extends('layouts.app')
 @section('content')
     <div class="flex-center position-ref full-height">
         @if (Route::has('login'))
@@ -17,9 +17,9 @@
             <div class="title m-b-md">
                 Product
             </div>
-            <p>
-                {{session()}}
-            </p>
+            <a href="#">Order List</a>
+            <a href="{{url("admin/product/create")}}" class = "btn btn-primary">Add new product</a>
+
             <table class = "table table-striped">
                 <thead>
 
@@ -28,23 +28,23 @@
                     <td>Product</td>
                     <td>Price</td>
 
+
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($product as $p)
+                @foreach($products as $p)
                     <tr>
                         <td>{{$p->id}}</td>
                         <td>{{$p->product}}</td>
                         <td>{{$p->price}}</td>
 
                         <td>
-                            <a href="{{url("product/{$p->id}")}}" class = "btn btn-primary">View</a>
-                            <a href="{{url("product/{$p->id}/edit")}}" class = "btn btn-success">Edit</a>
-                            <a href="{{url("product/{$p->id}")}}" class = "btn btn-danger">Delete</a>
-                            <form action="/product/{{$p->id}}" >
+                            <a href="{{url("admin/product/{$p->id}")}}" class = "btn btn-primary">View</a>
+                            <a href="{{url("admin/product/{$p->id}/edit")}}" class = "btn btn-success">Edit</a>
+                            <form action="{{url("admin/product/{$p->id}")}}" method = "post">
+                                @method('DELETE')
                                 @csrf
-                                @method("delete")
-                                <input type="submit" value = "delete" class = "btn btn-danger">
+                                <input type="submit" value="Delete" class="btn btn-danger">
                             </form>
                         </td>
                     </tr>
@@ -52,6 +52,7 @@
                 </tbody>
 
             </table>
+
         </div>
     </div>
 @endsection

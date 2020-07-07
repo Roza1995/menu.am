@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Product;
+use Illuminate\Http\Request;
 
-class UsersController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,10 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $product = Product::all();
-        return response()->view('product.index', ['product' => $product]);
+        $products = Product::all();
+        return response()->view('user.index',
+            ['products' => $products]
+        );
     }
 
     /**
@@ -25,7 +27,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-        return response()->view('product.create');
+        //return response()->view('user.create');
     }
 
     /**
@@ -36,11 +38,12 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        $product = new Product();
-        $product->product = $request->product;
-        $product->price = $request->price;
-        $product->save();
-        return redirect('/product')->with(['message' => 'Product successfully created']);
+
+        $products = new Product();
+        $products->count = $request->count;
+        $products->save();
+        return  redirect('user/order');
+
     }
 
     /**
@@ -51,7 +54,9 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-        return response()->view('product.show',['id'=>$id]);
+        $products = Product::find($id);
+        return response()->view('user.show',
+            ['products'=> $products]);
     }
 
     /**
@@ -62,8 +67,7 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        $product = Product::find($id);
-        return response()->view('product.edit',['id'=>$product]);
+        //
     }
 
     /**
@@ -75,11 +79,7 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $product = new Product();
-        $product->product = $request->product;
-        $product->price = $request->price;
-        $product->save();
-        return redirect('/product')->with(['message' => 'Product successfully edited']);
+        //
     }
 
     /**
@@ -90,6 +90,6 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        return redirect('/product')->with(['message' => 'Product successfully deleted']);
+        //
     }
 }

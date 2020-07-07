@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,8 +18,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('admin/product', 'ProductController');
+
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/home', 'HomeController@index')->name('home');
+Route::resource('admin/product', 'ProductController')->middleware('product');
+Route::resource('user/order', 'UserController')->middleware('user');

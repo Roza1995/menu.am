@@ -1,4 +1,4 @@
-@extends('app')
+@extends('layouts.app')
 @section('content')
     <div class="flex-center position-ref full-height">
         @if (Route::has('login'))
@@ -15,20 +15,19 @@
         @endif
         <div class="content">
             <div class="title m-b-md">
-                Edit the product
+                Create a product
             </div>
-            <form action="/product/{{$product->id}}" method="post">
+            <form action="/admin/product" method="post">
                 @csrf
-                @method("PUT")
                 <label for="product">Product</label>
-                <input type="text" name = "product" id = "product" value = "{{$product->name?? ''}}">
+                <input type="text" name = "product" id = "product">
                 <label for="price">Price</label>
-                <input type="number" step = "0,01" name = "price" id = "price" {{$product->price?? ''}}>
-
+                <input type="number" name = "price" id = "price">
                 <input type="submit" value = "Save">
+
+
             </form>
         </div>
     </div>
 @endsection
-
 

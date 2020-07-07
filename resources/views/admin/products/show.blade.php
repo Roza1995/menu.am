@@ -15,7 +15,7 @@
         @endif
         <div class="content">
             <div class="title m-b-md">
-                <h2>Your order</h2>
+                Product
             </div>
 
             <table class = "table table-striped">
@@ -28,9 +28,8 @@
                     <td>{{$products->price??''}}</td>
                 </tr>
 
-
             </table>
-
+            <a href = "{{url('admin/product')}}">Back</a>
         </div>
     </div>
 @endsection

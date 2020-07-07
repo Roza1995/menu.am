@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Product;
+use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
@@ -14,8 +14,10 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $product = Product::all();
-        return response()->view('admin.product.index', ['product' => $product]);
+        $products = Product::all();
+        return response()->view('admin.products.index',
+            ['products' => $products]
+        );
     }
 
     /**
@@ -25,7 +27,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return response()->view('admin.product.create');
+        return response()->view('admin.products.create');
     }
 
     /**
@@ -36,11 +38,14 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $product = new Product();
-        $product->product = $request->product;
-        $product->price = $request->price;
-        $product->save();
-        return redirect('admin/product')->with(['message' => 'Product successfully created']);
+
+        $products = new Product();
+
+        $products->product = $request->product;
+        $products->price = $request->price;
+        $products->save();
+        return  redirect('admin/product')
+            ->with(['message' => 'The product was successfully created']);
     }
 
     /**
@@ -51,7 +56,9 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        return response()->view('admin.product.show',['id'=>$id]);
+        $products = Product::find($id);
+        return response()->view('admin.products.show',
+            ['products'=> $products]);
     }
 
     /**
@@ -62,8 +69,9 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $product = Product::find($id);
-        return response()->view('admin.product.edit',['id'=>$product]);
+        $products = Product::find($id);
+        return response()->view('admin.products.edit',
+            ['products' => $products]);
     }
 
     /**
@@ -75,11 +83,11 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $product = new Product();
-        $product->product = $request->product;
-        $product->price = $request->price;
-        $product->save();
-        return redirect('admin/product')->with(['message' => 'Product successfully edited']);
+        Product::where('id', $id)->update([
+            'product'=> $request->product,
+            'price'=> $request->price,
+        ]);
+        return  redirect('admin/product');
     }
 
     /**
@@ -90,6 +98,8 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        return redirect('admin/product')->with(['message' => 'Product successfully deleted']);
+        Product::destroy($id);
+
+        return  redirect('admin/product');
     }
 }

@@ -15,6 +15,8 @@
                     @endif
 
                     {{ __('You are logged in!') }}
+                        <a href="admin/product">Menu.am
+                        </a>
                 </div>
             </div>
         </div>
