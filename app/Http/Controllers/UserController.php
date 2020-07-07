@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Product;
+use App\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -15,8 +17,10 @@ class UserController extends Controller
     public function index()
     {
         $products = Product::all();
+        $order = Order::with('product')->where('user_id', Auth::id())->get();
+        //dd($order[0]->product->product);
         return response()->view('user.index',
-            ['products' => $products]
+           compact('products', 'order')
         );
     }
 
@@ -39,9 +43,11 @@ class UserController extends Controller
     public function store(Request $request)
     {
 
-        $products = new Product();
-        $products->count = $request->count;
-        $products->save();
+        $order = Order::create([
+            'user_id' => Auth::id(),
+            'product_id' => $request->product_id,
+
+        ]);
         return  redirect('user/order');
 
     }

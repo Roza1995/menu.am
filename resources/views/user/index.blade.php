@@ -38,7 +38,12 @@
                         <td>{{$p->price}}</td>
 
                         <td>
-                            <a href="{{url("user/order/{$p->id}")}}" class = "btn btn-success">Make an Order</a>
+                            <form action="{{url("user/order")}}" method="post">
+                                @csrf
+                                <input type="submit" value = "Make an order">
+                                <input type="hidden" value = "{{$p->id}}" name = "product_id">
+                            </form>
+
 
                         </td>
                     </tr>
