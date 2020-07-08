@@ -15,8 +15,13 @@
                     @endif
 
                     {{ __('You are logged in!') }}
-                        <a href=" admin/product">Menu.am
+                        @if(request()->user()->user_type_id===1)
+                            <a href=" admin/product">Menu.am
+                            </a>
+                        @else
+                        <a href=" user/order">Menu.am
                         </a>
+                            @endif
                 </div>
             </div>
         </div>
