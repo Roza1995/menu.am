@@ -4,7 +4,7 @@
         @if (Route::has('login'))
             <div class="top-right links">
                 @auth
-                    <a href="{{ url('/home') }}">Home</a>
+                    <a href="{{ url('user/order') }}">Home</a>
                 @else
                     <a href="{{ route('login') }}">Login</a>
                     @if (Route::has('register'))
@@ -23,6 +23,7 @@
 
                 <tr>
                     <td>ID</td>
+                    <td>Image</td>
                     <td>Product</td>
                     <td>Price</td>
                     <td>Action</td>
@@ -34,18 +35,18 @@
                 @foreach($products as $p)
                     <tr>
                         <td>{{$p->id}}</td>
+                        <td><img src = "{{asset('storage/images/'.$p->image)}}" style = "width:200px; height:150px"/></td>
                         <td>{{$p->product}}</td>
                         <td>{{$p->price}}</td>
 
                         <td>
                             <form action="{{url("user/order")}}" method="post">
                                 @csrf
-                                <input type="submit" value = "Make an order">
+                                <input type="submit" value = "Make an order" class="btn btn-outline-success">
                                 <input type="hidden" value = "{{$p->id}}" name = "product_id">
                             </form>
-
-
                         </td>
+
                     </tr>
                 @endforeach
                 </tbody>

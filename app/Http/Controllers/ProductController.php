@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Product;
+use App\Order;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -15,8 +16,9 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::all();
+        $order = Order::all();
         return response()->view('admin.products.index',
-            ['products' => $products]
+            compact('products','order')
         );
     }
 
@@ -38,9 +40,19 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-
         $products = new Product();
-
+        if(isset($request->image) && $request->image->getClientOriginalName()){
+            $ext = $request->image->getClientOriginalExtension();
+            $file = rand(1,999)."."."$ext";
+            $request->image->storeAs('public/images', $file);
+        }else{
+            if(!$products->image){
+                $file = '';
+            }else{
+                $file = $products->image;
+            }
+        }
+        $products->image = $file;
         $products->product = $request->product;
         $products->price = $request->price;
         $products->save();
@@ -58,7 +70,7 @@ class ProductController extends Controller
     {
         $products = Product::find($id);
         return response()->view('admin.products.show',
-            ['products'=> $products]);
+            compact('products'));
     }
 
     /**
@@ -70,6 +82,7 @@ class ProductController extends Controller
     public function edit($id)
     {
         $products = Product::find($id);
+
         return response()->view('admin.products.edit',
             ['products' => $products]);
     }
@@ -83,9 +96,22 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $products = new Product;
+        if(isset($request->image) && $request->image->getClientOriginalName()){
+            $ext = $request->image->getClientOriginalExtension();
+            $file = rand(1,999)."."."$ext";
+            $request->image->storeAs('public/images', $file);
+        }else{
+            if(!$products->image){
+                $file = '';
+            }else{
+                $file = $products->image;
+            }
+        }
         Product::where('id', $id)->update([
             'product'=> $request->product,
             'price'=> $request->price,
+            'image' => $file,
         ]);
         return  redirect('admin/product');
     }
