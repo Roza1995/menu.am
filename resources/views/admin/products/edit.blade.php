@@ -4,7 +4,7 @@
         @if (Route::has('login'))
             <div class="top-right links">
                 @auth
-                    <a href="{{ url('/home') }}">Home</a>
+                    <a href="{{ url('admin/product') }}">Home</a>
                 @else
                     <a href="{{ route('login') }}">Login</a>
                     @if (Route::has('register'))
@@ -17,13 +17,14 @@
             <div class="title m-b-md">
                 Edit the product
             </div>
-            <form action="/admin/product/{{$products->id}}" method="post">
+            <form action="/admin/product/{{$products->id}}" method="post" enctype="multipart/form-data">
                 @csrf
                 @method("PUT")
                 <label for="product">Product</label>
                 <input type="text" name = "product" id = "product" value = "{{$products->product?? ''}}">
                 <label for="price">Price</label>
                 <input type="number" step = "0,01" name = "price" id = "price" value = "{{$products->price?? ''}}">
+                <input type="file" name = "image" value = "{{$products->image??''}}">
                 <input type="submit" value = "Save">
             </form>
         </div>

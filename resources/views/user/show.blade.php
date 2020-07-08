@@ -4,7 +4,7 @@
         @if (Route::has('login'))
             <div class="top-right links">
                 @auth
-                    <a href="{{ url('/home') }}">Home</a>
+                    <a href="{{ url('user/order') }}">Home</a>
                 @else
                     <a href="{{ route('login') }}">Login</a>
                     @if (Route::has('register'))
@@ -15,21 +15,10 @@
         @endif
         <div class="content">
             <div class="title m-b-md">
-                <h2>Your order</h2>
+                <h2 class="text-center">Dear {{auth()->user()->name}} your order was successfully ordered</h2>
             </div>
 
-            <table class = "table table-striped">
-                <tr>
-                    <td>Product</td>
-                    <td>{{$products->product??''}}</td>
-                </tr>
-                <tr>
-                    <td>Price</td>
-                    <td>{{$products->price??''}}</td>
-                </tr>
 
-
-            </table>
 
         </div>
     </div>

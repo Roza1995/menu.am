@@ -31,7 +31,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //return response()->view('user.create');
+       //
     }
 
     /**
@@ -42,13 +42,13 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-
         $order = Order::create([
             'user_id' => Auth::id(),
             'product_id' => $request->product_id,
 
         ]);
-        return  redirect('user/order');
+
+        return  redirect('user/order/{$products->id}');
 
     }
 
