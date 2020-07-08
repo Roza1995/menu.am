@@ -5,9 +5,6 @@
             <div class="top-right links">
                 @auth
                     <a href="{{ url('user/order') }}">Home</a>
-                    <div class="top-right links">
-                        <a href="{{ url('user/order/'.auth()->user()->id.'/edit') }}">order</a>
-                    </div>
                 @else
                     <a href="{{ route('login') }}">Login</a>
                     @if (Route::has('register'))
@@ -17,12 +14,27 @@
             </div>
         @endif
         <div class="content">
-            <div class="title m-b-md">
-                <h2 class="text-center">Dear {{auth()->user()->name}} your order was successfully ordered</h2>
-            </div>
+
+            <h1>Order List</h1>
+            <table class = "table table-striped">
+
+                <thead>
+                <tr>
+                    <td>Product_ID</td>
+                </tr>
+                </thead>
+
+                <tbody>
+                @foreach($order as $o)
+                    @if($o->user_id == $user_id)
+                    <tr>
+                        <td>{{$o->product_id}}</td>
+                        @endif
+                        @endforeach
+                    </tr>
+                </tbody>
+
+            </table>
         </div>
     </div>
 @endsection
-
-
-

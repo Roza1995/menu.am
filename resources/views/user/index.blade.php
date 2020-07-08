@@ -5,6 +5,9 @@
             <div class="top-right links">
                 @auth
                     <a href="{{ url('user/order') }}">Home</a>
+                    <div class="top-right links">
+                    <a href="{{ url('user/order/'.auth()->user()->id.'/edit') }}">order</a>
+                    </div>
                 @else
                     <a href="{{ route('login') }}">Login</a>
                     @if (Route::has('register'))

@@ -73,7 +73,11 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $order = order::all();
+        $user_id = $id;
+        return response()->view('user.order',
+            compact('user_id','order')
+        );
     }
 
     /**
