@@ -27,7 +27,10 @@
                     <td>Price</td>
                     <td>{{$products->price??''}}</td>
                 </tr>
-
+                <tr>
+                    <td>image</td>
+                    <td><img src = "{{asset('storage/images/'.$products->image)}}" style = "width:200px; height:150px"/></td>
+                </tr>
             </table>
 
 
