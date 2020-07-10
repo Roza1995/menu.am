@@ -79,11 +79,11 @@ class LoginController extends Controller
         return redirect('user/order');*/
 
     public function socialite($website){
-        return Socialite::driver('$ebsite')->redirect();
+        return Socialite::driver('google')->redirect();
     }
 
     public function socialiteCallback($website){
-        $social_user = Socialite::driver('website')
+        $social_user = Socialite::driver('google')
             ->stateless()
             ->user();
         $user = User::firstOrCreate([

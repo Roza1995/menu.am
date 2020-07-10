@@ -57,15 +57,15 @@
                                     {{ __('Login') }}
                                 </button>
                                 <a href="{{url('/login/github')}}"
-                                class = "btn btn-outline-primary">
-                                    <i class = "fa fa-github" aria-hidden = "true"
-                                        style = "font-size: 20px">
+                                   class="btn btn-outline-primary">
+                                    <i class="fa fa-github" aria-hidden="true"
+                                        style = "font-size:20px">
                                     </i>
                                 </a>
                                 <a href="{{url('/login/google')}}"
-                                   class = "btn btn-outline-primary">
+                                   class="btn btn-outline-primary">
                                     <i class = "fa fa-google" aria-hidden = "true"
-                                       style = "font-size: 20px">
+                                       style = "font-size:20px">
                                     </i>
                                 </a>
                                 @if (Route::has('password.request'))
