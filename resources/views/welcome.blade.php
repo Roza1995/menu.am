@@ -68,8 +68,11 @@
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
+                        @if(auth()->user()->user_type_id === 1)
                         <a href="{{ url('admin/product') }}">Admin</a>
+                        @else
                         <a href="{{ url('user/order') }}">User</a>
+                        @endif
                     @else
                         <a href="{{ route('login') }}">Login</a>
 

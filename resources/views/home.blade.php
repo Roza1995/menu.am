@@ -13,10 +13,15 @@
                             {{ session('status') }}
                         </div>
                     @endif
+                        @if(auth()->user()->user_type_id === 1)
+                            {{ __('You are registered as an Admin') }}
+                            <a href="{{ url('admin/product') }}">Welcome to your page</a>
+                        @else
+                            {{ __('You are registered as a User!') }}
+                            <a href="{{ url('user/order') }}">Welcome to your page</a>
+                        @endif
 
-                    {{ __('You are logged in!') }}
-                        <a href="admin/product">Menu.am
-                        </a>
+
                 </div>
             </div>
         </div>
