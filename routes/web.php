@@ -19,11 +19,11 @@ Route::get('/', function () {
 });
 
 
-Auth::routes();
-//Auth::routes(['verify'=>true]);
+//Auth::routes();
+Auth::routes(['verify'=>true]);
 
 Route::get('/home', 'HomeController@index')
-    //->middleware('verified')
+    ->middleware('verified')
     ->name('home');;
 Route::resource('admin/product', 'ProductController')->middleware('product');
 Route::resource('user/order', 'UserController')->middleware('user');
