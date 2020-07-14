@@ -18,6 +18,12 @@
                 Product
             </div>
             <a href="{{url("admin/product/create")}}" class = "btn btn-primary">Add new product</a>
+            <a href="{{route('product_export')}}" class = "btn btn-outline-primary">Export Products</a>
+            <form action="{{route('product_import')}}" method="post" enctype="multipart/form-data">
+                @csrf
+                <input type="file" name="import_file">
+                <input type="submit" value = "Input Products" class = "btn btn-outline-success">
+            </form>
 
             <table class = "table table-striped">
                 <thead>

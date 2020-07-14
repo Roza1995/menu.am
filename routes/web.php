@@ -24,7 +24,14 @@ Auth::routes(['verify'=>true]);
 
 Route::get('/home', 'HomeController@index')
     ->middleware('verified')
-    ->name('home');;
+    ->name('home');
+
+Route::get('/product/export', 'ProductController@exportProducts')
+    ->name('product_export');
+
+Route::post('/product/import', 'ProductController@importProducts')
+    ->name('product_import');
+
 Route::resource('admin/product', 'ProductController')->middleware('product');
 Route::resource('user/order', 'UserController')->middleware('user');
 //Route::get('/login/github', 'Auth\LoginController@socialite');
