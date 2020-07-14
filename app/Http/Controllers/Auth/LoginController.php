@@ -81,9 +81,6 @@ class LoginController extends Controller
         );
 
         Auth::login($user);
-
-        return redirect('/user/order');
-
-
+        return redirect('user/order');
     }
 }
