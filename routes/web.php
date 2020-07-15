@@ -32,6 +32,9 @@ Route::get('/product/export', 'ProductController@exportProducts')
 Route::post('/product/import', 'ProductController@importProducts')
     ->name('product_import');
 
+Route::get('/product/pdf', 'ProductController@generate_pdf')
+    ->name('pdf');
+
 Route::resource('admin/product', 'ProductController')->middleware('product');
 Route::resource('user/order', 'UserController')->middleware('user');
 //Route::get('/login/github', 'Auth\LoginController@socialite');
