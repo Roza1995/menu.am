@@ -28,7 +28,7 @@
 /* makes the font 33% larger relative to the icon container */
 
 .fa-lg {
-  font-size: 1.33333333em;
+  font-size: 1.3333333333em;
   line-height: 0.75em;
   vertical-align: -15%;
 }
@@ -206,7 +206,7 @@
 }
 
 .fa-inverse {
-  color: #ffffff;
+  color: #fff;
 }
 
 /* Font Awesome uses the Unicode Private Use Area (PUA) to ensure screen

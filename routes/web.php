@@ -21,6 +21,13 @@ Route::get('/', function () {
 
 //Auth::routes();
 Auth::routes(['verify'=>true]);
+Route::post('/products/import',
+    'ProductController@importProducts')
+    ->name('product_import');
+Route::get('/products/export',
+    'ProductController@exportProducts')
+    ->name('product_export');
+
 
 Route::get('/home', 'HomeController@index')
     ->middleware('verified')
