@@ -9,6 +9,7 @@ use App\Order;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use niklasravnsborg\LaravelPdf\Pdf;
+use Illuminate\Support\Facades\App;
 
 
 class ProductController extends Controller
@@ -20,6 +21,10 @@ class ProductController extends Controller
      */
     public function index()
     {
+        $lang = request()->has('lang')? request()->lang : '';
+        if(!empty($lang)){
+            App::setlocale($lang);
+        }
         $products = Product::all();
         $order = Order::all();
         return response()->view('admin.products.index',

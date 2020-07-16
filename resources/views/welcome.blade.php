@@ -85,7 +85,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Welcome to Menu.am
+                    @lang('translate.welcome') to Menu.am
                 </div>
 
 
