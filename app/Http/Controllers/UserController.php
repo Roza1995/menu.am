@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Billing\Payment;
 use App\Product;
 use App\Order;
+use App\Sales\TopUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
@@ -37,11 +40,24 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     * @param Payment $payment
+     * @param TopUsers $users
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function store(Request $request)
+    public function store(Request $request, Payment $payment, TopUsers $users)
     {
+        $arr = [
+            'name'=> 'jasmine',
+            'lastname' => 'Beeh'
+        ];
+        $member = Arr::pull($arr, 'name');
+        echo $member;
+        dd($arr);
+        dd(Arr::add($arr, 'lastname', 'Tbeeh'));
+        $users->changeDiscount();
+//        $payment = new Payment('USD');
+        dd($payment->charge(800));
         $order = Order::create([
             'user_id' => Auth::id(),
             'product_id' => $request->product_id,

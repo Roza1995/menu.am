@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\App;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,7 +15,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//Route::get('/{lang?}', function ($lang = null) {
+//    if(!empty($lang)){
+//        App::setLocale($lang);
+//    }
+//    return view('welcome');
+//});
 Route::get('/', function () {
+    $lang = request()->has('lang') ? request()->lang : '';
+    if(!empty($lang)){
+        App::setLocale($lang);
+    }
     return view('welcome');
 });
 
@@ -38,13 +49,11 @@ Route::get('/product/export', 'ProductController@exportProducts')
 
 Route::post('/product/import', 'ProductController@importProducts')
     ->name('product_import');
-
-Route::get('/product/pdf', 'ProductController@generate_pdf')
+Route::get('/product/pdf', 'ProductController@productPdf')
     ->name('pdf');
 
 Route::resource('admin/product', 'ProductController')->middleware('product');
 Route::resource('user/order', 'UserController')->middleware('user');
-
 
 Route::get('/login/{website}', 'Auth\LoginController@socialite');
 Route::get('/login/{website}/callback', 'Auth\LoginController@socialiteCallback');

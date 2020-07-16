@@ -4,27 +4,40 @@
         @if (Route::has('login'))
             <div class="top-right links">
                 @auth
-                    <a href="{{ url('admin/product') }}">Home</a>
+                    <a href="{{ url('admin/product') }}">
+                        {{__('translate.home')}}
+                    </a>
                 @else
-                    <a href="{{ route('login') }}">Login</a>
+                    <a href="{{ route('login') }}">
+                        @lang('translate.login')
+                    </a>
                     @if (Route::has('register'))
-                        <a href="{{ route('register') }}">Register</a>
+                        <a href="{{ route('register') }}">
+                            @lang('translate.register')
+                        </a>
                     @endif
                 @endauth
             </div>
         @endif
         <div class="content">
             <div class="title m-b-md">
-                Product
+                {{__('translate.product')}}
             </div>
-            <a href="{{url("admin/product/create")}}" class = "btn btn-primary">Add new product</a>
-
-            <a href="{{url("product/pdf")}}" class = "btn btn-warning">Download Pdf</a>
-            <a href="{{route('product_export')}}" class = "btn btn-outline-primary">Export Products</a>
+            <a href="{{url("admin/product/create")}}" class = "btn btn-primary">
+                {{__('translate.add_new_product')}}
+            </a>
+            <a href="{{url("product/pdf")}}" class = "btn btn-warning">
+                @lang('translate.download_pdf')
+            </a>
+            <a href="{{route('product_export')}}" class = "btn btn-outline-primary">
+                @lang('translate.export_product')
+            </a>
             <form action="{{route('product_import')}}" method="post" enctype="multipart/form-data" style = "display:inline-block">
                 @csrf
                 <input type="file" name="import_file">
-                <input type="submit" value = "Imput Products" class = "btn btn-outline-success">
+                <input type="submit"
+                       value = "{{__('translate.import_product')}}"
+                       class = "btn btn-outline-success">
             </form>
             <table class = "table table-striped">
                 <thead>
