@@ -16,7 +16,7 @@ class ProductImport implements ToModel
     {
         return new Product([
             'product' => $row[0],
-            'price'   => $row[1]
+            'price' =>$row[1],
         ]);
     }
 }

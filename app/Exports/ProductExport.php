@@ -12,7 +12,7 @@ class ProductExport implements FromCollection
     */
     public function collection()
     {
-//        return Product::all();
-        return Product::select(['product', 'price'])->get();
+        return Product::select(['product','price'])->get();
+        //return Product::all();
     }
 }

@@ -8,6 +8,7 @@ use App\Product;
 use App\Order;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
+use niklasravnsborg\LaravelPdf\Pdf;
 
 class ProductController extends Controller
 {
@@ -131,16 +132,19 @@ class ProductController extends Controller
 
         return  redirect('admin/product');
     }
+    public function importProducts() {
 
-    public function importProducts()
-    {
-        Excel::import(new ProductImport,
-            request()->file('import_file'));
-        return back();
+        return Excel::import(new ProductImport,request()->file('import_file'));
     }
 
-    public function exportProducts()
-    {
-       return Excel::download(new ProductExport, 'products.xlsx');
+    public function exportProducts() {
+        return Excel::download(new ProductExport, 'products.xlsx');
+         //return back();
+    }
+
+    function generate_pdf() {
+
+        $pdf = new PDF('<h1>Hello from Menu.am</h1>');
+        return $pdf->download('document.pdf');
     }
 }
