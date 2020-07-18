@@ -34,6 +34,11 @@ Route::get('/', function ($lan = null) {
     return view('welcome');
 });
 
+Route::get('products/add_to_cart', 'UserController@addToCart')
+    ->name('addToCart');
+
+Route::get('products/show_cart', 'UserController@showCart');
+
 
 
 //Auth::routes();

@@ -5,6 +5,15 @@
             <div class="top-right links">
                 @auth
                     <a href="{{ url('user/order') }}">Home</a>
+
+                    <a href="{{url('/products/show_cart')}}" class="ml-3">
+                        <span class="fa-stack fa-2x has-badge"
+                              data-count="{{session()->has('cart')
+                                ? session()->get('cart')->getTotalQty(): ''}}">
+                          <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
+                          <i style="" class="fa fa-shopping-cart fa-stack-2x red-cart"></i>
+                        </span>
+                    </a>
                 @else
                     <a href="{{ route('login') }}">Login</a>
                     @if (Route::has('register'))
@@ -40,6 +49,9 @@
                         <td>{{$p->price}}</td>
 
                         <td>
+                            <a href="{{route('addToCart',['id'=>$p->id])}}" class="btn btn-outline-primary">
+                                Add new cart
+                            </a>
                             <form action="{{url("user/order")}}" method="post">
                                 @csrf
                                 <input type="submit" value = "Make an order" class="btn btn-outline-success">
