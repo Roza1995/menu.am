@@ -9,6 +9,8 @@ use App\Sales\TopUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
+use App\Cart;
+use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
@@ -45,19 +47,19 @@ class UserController extends Controller
      * @param TopUsers $users
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function store(Request $request, Payment $payment, TopUsers $users)
+    public function store(Request $request)
     {
-        $arr = [
-            'name'=> 'jasmine',
-            'lastname' => 'Beeh'
-        ];
-        $member = Arr::pull($arr, 'name');
-        echo $member;
-        dd($arr);
-        dd(Arr::add($arr, 'lastname', 'Tbeeh'));
-        $users->changeDiscount();
+//        $arr = [
+//            'name'=> 'jasmine',
+//            'lastname' => 'Beeh'
+//        ];
+//        $member = Arr::pull($arr, 'name');
+//        echo $member;
+//        dd($arr);
+//        dd(Arr::add($arr, 'lastname', 'Tbeeh'));
+//        $users->changeDiscount();
 //        $payment = new Payment('USD');
-        dd($payment->charge(800));
+//        dd($payment->charge(800));
         $order = Order::create([
             'user_id' => Auth::id(),
             'product_id' => $request->product_id,
@@ -113,5 +115,31 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function addToCart(Request $request)
+    {
+        $products  = Product::all();
+        $order = Order::with('product')
+            ->where('user_id', Auth::id())->get();
+        if(!empty($request->id)){
+            $product = Product::findOrFail($request->id);
+            $old_cart = $request->session()->has('cart')
+                ? \session()->get('cart') : null;
+            $cart = new Cart($old_cart);
+            $cart->add($product, $request->id);
+            Session::put('cart', $cart);
+        }
+        return redirect('user/order')->
+            with(compact('products', 'order'));
+    }
+
+    public function showCart()
+    {
+        $cart = Session::has('cart')
+            ? \session()->get('cart') : [];
+//        dd($cart);
+        return response()->view('user.show_cart',
+            compact('cart'));
     }
 }

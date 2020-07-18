@@ -2,9 +2,29 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito');
 //@import "~font-awesome";
 @import "node_modules/font-awesome/scss/font-awesome";
-
 // Variables
 @import 'variables';
-
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+.fa-stack[data-count]:after{
+    position:absolute;
+    right:0;
+    top:0;
+    content: attr(data-count);
+    font-size:40%;
+    padding:.6em;
+    border-radius:999px;
+    line-height:.75em;
+    color:$indigo;
+    text-align:center;
+    min-width:2em;
+    font-weight:bold;
+    background: white;
+    border-style:solid;
+}
+.fa-circle {
+    color: #3fb4df;
+}
+.red-cart {
+    color: #52b1df; background:white;
+}
