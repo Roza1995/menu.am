@@ -41,6 +41,7 @@ class Cart
         $this->total_price += $item->price;
     }
 
+
     public function getTotalQty(){
         return $this->total_qty;
     }

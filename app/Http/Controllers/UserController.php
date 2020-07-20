@@ -137,4 +137,6 @@ class UserController extends Controller
 
         return response()->view('user.show_cart', compact('cart'));
     }
+
+
 }

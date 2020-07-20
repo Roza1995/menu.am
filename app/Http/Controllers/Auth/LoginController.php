@@ -78,33 +78,13 @@ class LoginController extends Controller
         Auth::login($user);
         return redirect('user/order');*/
 
-    /*public function socialite($website){
-        return Socialite::driver('google')->redirect();
-    }
 
-    public function socialiteCallback($website){
-        $social_user = Socialite::driver('google')
-            ->stateless()
-            ->user();
-        $user = User::firstOrCreate([
-            'email' => $social_user->email
-        ], [
-                'name' => $social_user->name ?? $social_user->nickname,
-                'password' => Hash::make(Str::random(20))
-            ]
-        );
-
-        Auth::login($user);
-        return redirect('user/order');
-
-
-    }*/
     public function socialite($website){
-        return Socialite::driver('facebook')->redirect();
+        return Socialite::driver("$website")->redirect();
     }
 
     public function socialiteCallback($website){
-        $social_user = Socialite::driver('facebook')
+        $social_user = Socialite::driver("$website")
             ->user();
 
         $user = User::firstOrCreate([
