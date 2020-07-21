@@ -25,7 +25,12 @@ use Illuminate\Support\Facades\App;
     }
     return view('welcome');
 });*/
-
+Route::get('event', function (){
+    event(new \App\Events\OrderShipped('on way'));
+});
+Route::get('listen', function (){
+    return view('test');
+});
 Route::get('/', function ($lan = null) {
     $lang = request()->has('lang')? request()->lang : '';
     if(!empty($lang)){
@@ -70,3 +75,7 @@ Route::resource('user/order', 'UserController')->middleware('user');
 
 Route::get('/login/{website}', 'Auth\LoginController@socialite');
 Route::get('/login/{website}/callback', 'Auth\LoginController@socialiteCallback');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
