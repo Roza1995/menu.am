@@ -10,8 +10,8 @@
                         <span class="fa-stack fa-2x has-badge"
                               data-count="{{session()->has('cart')
                                 ? session()->get('cart')->getTotalQty(): ''}}">
-                        <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
-                        <i style="" class="fa fa-shopping-cart fa-stack-2x red-cart"></i>
+                          <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
+                          <i style="" class="fa fa-shopping-cart fa-stack-2x red-cart"></i>
                         </span>
                     </a>
                 @else
@@ -24,7 +24,7 @@
         @endif
         <div class="content">
             <div class="title m-b-md">
-                Product
+                <h1>Product</h1>
             </div>
 
             <table class="table table-striped">
@@ -47,9 +47,8 @@
                         <td>{{$p->price}}</td>
 
                         <td>
-                            <a href="{{route('addToCart', ['id' =>$p->id])}}"
-                               class="btn btn-outline-primary">
-                                Add to cart
+                            <a href="{{route('addToCart',['id'=>$p->id])}}" class="btn btn-outline-primary">
+                                Add new cart
                             </a>
                             <form action="{{url("user/order")}}" method="post">
                                 @csrf

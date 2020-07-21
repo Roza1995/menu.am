@@ -10,8 +10,9 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\App;
 use Maatwebsite\Excel\Facades\Excel;
-use niklasravnsborg\LaravelPdf\Facades\Pdf;
-use niklasravnsborg\LaravelPdf\Pdf as MPDF;
+use niklasravnsborg\LaravelPdf\Pdf;
+
+
 
 class ProductController extends Controller
 {
@@ -23,9 +24,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $lang = request()->has('lang') ? request()->lang : '';
+        $lang = request()->has('lang')? request()->lang : '';
         if(!empty($lang)){
-            App::setLocale($lang);
+            App::setlocale($lang);
         }
         $products = Product::all();
         $order = Order::all();

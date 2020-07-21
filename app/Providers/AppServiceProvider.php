@@ -14,7 +14,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton(Payment::class, function (){
+        $this->app->singleton(Payment::class, function(){
             return new Payment('USD');
         });
     }

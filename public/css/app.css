@@ -13974,8 +13974,8 @@ a.text-dark:focus {
 
 .fa-stack[data-count]:after {
   position: absolute;
-  right: 0;
-  top: 0;
+  right: 0%;
+  top: 0%;
   content: attr(data-count);
   font-size: 40%;
   padding: 0.6em;
@@ -13990,11 +13990,11 @@ a.text-dark:focus {
 }
 
 .fa-circle {
-  color: #3fb4df;
+  color: #162edf;
 }
 
 .red-cart {
-  color: #52b1df;
+  color: #4f58df;
   background: white;
 }
 

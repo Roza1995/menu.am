@@ -61,26 +61,43 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    public function socialite($website)
-    {
-        return Socialite::driver($website)->redirect();
+    /*public function socialite(){
+        return Socialite::driver('github')->redirect();
     }
 
-    public function socialiteCallback($website)
-    {
-        $social_user = Socialite::driver($website)
-            ->stateless()
-            ->user();
-        $user = User::firstOrCreate(
-            [
-                'email' => $social_user->email
-            ],[
-                'name' => $social_user->name ?? $social_user->nickname,
+    public function socialiteCallback(){
+        $social_user = Socialite::driver('github')->user();
+        $user = User::firstOrCreate([
+            'email' => $social_user->email
+        ], [
+            'name' => $social_user->name ?? $social_user->nickname,
                 'password' => Hash::make(Str::random(20))
             ]
         );
 
         Auth::login($user);
+        return redirect('user/order');*/
+
+
+    public function socialite($website){
+        return Socialite::driver("$website")->redirect();
+    }
+
+    public function socialiteCallback($website){
+        $social_user = Socialite::driver("$website")
+            ->user();
+
+        $user = User::firstOrCreate([
+            'email' => $social_user->email
+        ], [
+                'name' => $social_user->name ?? $social_user->nickname,
+                'password' => Hash::make(Str::random(20))
+            ]
+        );
+
+        Auth::login($user,true);
         return redirect('user/order');
+
+
     }
 }

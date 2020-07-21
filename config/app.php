@@ -163,6 +163,8 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
         niklasravnsborg\LaravelPdf\PdfServiceProvider::class,
+        Laravel\Cashier\CashierServiceProvider::class,
+
         /*
          * Package Service Providers...
          */
@@ -229,6 +231,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'PDF' => niklasravnsborg\LaravelPdf\Facades\Pdf::class,
+
     ],
 
 ];

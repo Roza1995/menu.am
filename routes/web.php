@@ -15,22 +15,34 @@ use Illuminate\Support\Facades\App;
 |
 */
 
-//Route::get('/{lang?}', function ($lang = null) {
-//    if(!empty($lang)){
-//        App::setLocale($lang);
-//    }
-//    return view('welcome');
-//});
-Route::get('/', function () {
-    $lang = request()->has('lang') ? request()->lang : '';
+/*Route::get('/', function () {
+    return view('welcome');
+});*/
+
+/*Route::get('/{lang?}', function ($lan = null) {
     if(!empty($lang)){
-        App::setLocale($lang);
+        App::setlocale($lang);
+    }
+    return view('welcome');
+});*/
+
+Route::get('/', function ($lan = null) {
+    $lang = request()->has('lang')? request()->lang : '';
+    if(!empty($lang)){
+        App::setlocale($lang);
     }
     return view('welcome');
 });
+
 Route::get('products/add_to_cart', 'UserController@addToCart')
     ->name('addToCart');
+
 Route::get('products/show_cart', 'UserController@showCart');
+Route::post('/charge', 'CheckoutController@charge');
+
+
+
+
 //Auth::routes();
 Auth::routes(['verify'=>true]);
 Route::post('/products/import',
