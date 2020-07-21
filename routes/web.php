@@ -26,6 +26,14 @@ use Illuminate\Support\Facades\App;
     return view('welcome');
 });*/
 
+Route::get('event', function(){
+    event(new \App\Events\OrderShipped('on way'));
+});
+
+Route::get('listen',function (){
+    return view('listen');
+});
+
 Route::get('/', function ($lan = null) {
     $lang = request()->has('lang')? request()->lang : '';
     if(!empty($lang)){
